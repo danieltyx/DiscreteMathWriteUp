@@ -1,0 +1,43 @@
+                    The luacode package for LuaLaTeX
+
+
+Executing Lua code from within TeX with \directlua can sometimes be
+tricky: there is no easy way to use the percent character, counting
+backslashes may be hard, and Lua comments don't work the way you expect.
+This package provides the \luaexec command and the luacode(*)
+environments to help with these problems.
+
+For an introduction to the most important gotchas of \directlua, see
+lualatex-doc.pdf. Before you start using the tools in this package, let me
+insist that the most robust way to manage a non-trivial piece of Lua code is
+to use an external file and source it from Lua, as explained in the cited
+document.
+
+
+Installation
+------------
+
+Here are the recommended installation methods (preferred first).
+
+1. If you are using TeX Live 2008 or later, use 'tlmgr install luacode'.
+If your are using MiKTeX, use the MiKTeX Package Manager.
+Alternatively, try you Linux distribution's package management system.
+
+2. a. Grab luacode.tds.zip on the CTAN.
+   b. Unzip it at the root of one or your TDS trees.
+   c. You may need to update some filename database after this, see your TeX
+      distribution's manual for details. (Hint: with TeX Live, run 'mktexlsr';
+      with MikTeX, look for "Refresh FNDB" in the MikTeX menu.)
+
+3. a. Grab the sources from CTAN or github.
+   b. Run 'make install TEXMFROOT=/path/to/texmf'.
+      (Warning: 'make install' without giving a TEXMFROOT will
+       put files in './texmf', which is probably not what you want.)
+   c. See 2c.
+
+
+Licence
+-------
+
+This package is distributed under the terms of the LPPL v1.3c or later.
+See the source file luacode.dtx for details.

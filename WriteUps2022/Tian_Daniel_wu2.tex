@@ -1,0 +1,346 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{9/28/22}
+\chead{\bf \large Write Up 2}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+\begin{enumerate}
+	\item
+	Here is a Boolean operation called \emph{exclusive or} (sometimes called \emph{xor}), denoted $\veebar$. It's defined by the following table
+		\begin{displaymath}
+		\begin{array}{c| c||c}
+			x & y & x \veebar y \\ % Use & to separate the columns
+			\hline  % Put a horizontal line between the table header and the rest.
+			T & T & F\\
+			T & F & T\\
+			F & T & T\\
+			F & F & F\\
+		\end{array}	
+	\end{displaymath}
+	Do the following:
+	\begin{enumerate}
+		\item Prove that $\veebar$ obeys the commutative and associative properties.
+		
+		\begin{proof}
+				\begin{displaymath}
+				\begin{array}{c| c| c|c}
+					x & y & x \veebar y & y \veebar x \\ % Use & to separate the columns
+					\hline  % Put a horizontal line between the table header and the rest.
+					T & T & F &F\\
+					T & F & T &T\\
+					F & T & T &T\\
+					F & F & F &F\\
+				\end{array}	
+			\end{displaymath}
+			Since the truth values are identical in $x \veebar y$ and $y \veebar x$, we can conclude that  $x \veebar y = y \veebar x$, which is the communtative property.
+			
+		\begin{displaymath}
+			\begin{array}{c| c| c|c|c|c|c}
+				x & y & z & x \veebar y & y \veebar z & (x \veebar y) \veebar z & x \veebar (y \veebar z) \\ % Use & to separate the columns
+				\hline  % Put a horizontal line between the table header and the rest.
+				T & T & T&F&F &T&T\\
+				T & T & F &F &T&F&F\\
+				T & F & T &T &T&F&F\\
+				T & F & F &T &F&T&T\\
+				F & T & T&T&F&F&F\\
+				F & T & F &T&T&T&T\\
+				F & F & T &F & T&T&T\\
+				F & F & F &F &F&F&F\\
+			\end{array}	
+		\end{displaymath}
+			Since the truth values are identical in $(x \veebar y) \veebar z$ and $x \veebar (y \veebar z)$, we can conclude that  $(x \veebar y) \veebar z = x \veebar (y \veebar z)$, which proves the associative property.
+		\end{proof}
+		
+		\item Prove that $x \veebar y$ is logically equivalent to $(x \land \lnot y) \lor ((\lnot x)\land y)$. (Note, this means that $\veebar$ can be expressed in terms of the basic operations $\land$, $\lor$, and $\lnot$.) 
+		
+		\begin{proof}
+				\begin{displaymath}
+				\begin{array}{c| c| c|c|c|c|c|c}
+					x & y & \lnot x&\lnot y &x \land \lnot y &(\lnot x)\land y & x \veebar y& (x \land \lnot y) \lor ((\lnot x)\land y)\\ 
+					\hline  
+					T & T & F &F&F&F&F&F\\
+					T & F & F &T&T&F&T&T\\
+					F & T & T &F&F&T&T&T\\
+					F & F & T &T&F&F&F&F\\
+				\end{array}	
+			\end{displaymath}
+		Since the truth values are identical in the last two columns, we can conclude that $x \veebar y$ is logically equivalent to $(x \land \lnot y) \lor ((\lnot x)\land y)$.  
+		\end{proof}
+		\item Prove that $x\veebar y$ is logically equivalent to $(x \lor y) \land \lnot (x\land y)$. 
+		
+		\begin{proof}
+			\begin{displaymath}
+			\begin{array}{c| c| c|c|c|c|c}
+				x & y & x \lor y& x \land y& \lnot (x \land y) &(x \lor y) \land \lnot (x\land y)&x \veebar y\\ 
+				\hline  
+				T & T & T &T&F&F&F\\
+				T & F & T &F&T&T&T\\
+				F & T & T &F&T&T&T\\
+				F & F & F &F&T&F&F\\
+			\end{array}	
+		\end{displaymath}
+		Since the truth values are identical in the last two columns, we can conclude that $x \veebar y$ is logically equivalent to $(x \lor y) \land \lnot (x\land y)$.  
+		\end{proof}
+		\item Explain why the operation $\veebar$ is called \emph{exclusive or}. 
+		\begin{solution}
+			A possible explanation of naming the operation $\veebar$ \emph{exclusive or} is that it only outputs true when either of the input is true but not both. Operation $\lor$ outputs true when either of the input is true including the case where both are true. Thus, the exclusivity of the case where both inputs are true gives it its name.
+		\end{solution}
+	\end{enumerate}
+	
+	\item
+	We've covered several different binary Boolean operations so far, including \emph{and}, \emph{or}, \emph{conditional statements}, \emph{biconditional statements}, and now \emph{exclusive or}. How many different binary Boolean operations can there be? Give an explanation for your answer.\\
+	\begin{solution}
+		It can have as much as 16 binary Boolean operations. For the inputs of binary Boolean operations, we have four possible combinations: $TT$,  $TF$, $FT$ and $FF$. For each possible input, we have two possible outputs, $T$, true, or $F$, false. Hence, there exists $2*2*2*2=16$ different output combinations for the result of four input combinations. Hence, if we devote one operation to one distinct result, we would have 16 operations in total.
+	\end{solution}
+	\item
+	In previous work we've shown that operations such as $\Longrightarrow$, $\iff$, and $\veebar$ are expressible in terms of the basic operations $\lor$, $\land$, $\lnot$. Show that all Boolean operations can be expressed in terms of these basic three. \\
+	
+	\begin{proof}
+			\begin{displaymath}
+			\begin{array}{c|c|c| c| c|c|c|c|c|c}
+				x & y & x \lor T&\lnot (x \land y)& \lnot x \lor y& \lnot x&x \lor \lnot y&\lnot y& (x\land y) \lor (\lnot x\land \lnot y)	&\lnot (x \lor y)\\ 
+				\hline  
+				T & T &T &F & T &F&T&F&T&F\\
+				T & F & T&T& F &F&T&T&F&F\\
+				F & T &T&T& T &T&F&F&F&F\\
+				F & F & T&T&T &T&T&T&T&T\\
+			\end{array}	
+		\end{displaymath}
+		Noticing that eight possible results are listed in the truth table above, we can simply add not operation in front of all eight of them and express another eight. Since there is no identical combinations and all operations have $X$ false and $Y$ false as true, by adding the not operation to flip the results, the other eight binary combinations has to be distinct as well(with operations that will express all $X$ false and $Y$ false as false). Therefore, there will be 16 different combinations expressed. We proved in the last problem that there are 16 possible combinations in total and hence we found ways to express all of them only uses basic opertions.
+		
+		  
+		  
+		  
+		 
+	\end{proof}
+	
+	
+	
+	
+	
+	
+	
+	\item
+	Prove that $x \lor y$ can be reexpressed in terms of just $\land$ and $\lnot$ so all binary Boolean operations can be reduced to just two basic operations. \\
+	\begin{proof}
+	From DeMorgan’s Laws, we know that $\lnot (x \lor y) = \lnot x \land \lnot y$. Also, we know that $\lnot (\lnot A) = A$, where $A$ is a logic expression. Hence we can express $x \lor y$ by $\lnot(\lnot (x \lor y))$, which is equivalent to  $\lnot ( \lnot x \land \lnot y)$.
+
+			\begin{displaymath}
+			\begin{array}{c| c| c|c|c|c|c}
+				x & y & \lnot x &\lnot y& \lnot x \land \lnot y & \lnot ( \lnot x \land \lnot y )& x \lor y\\
+				\hline  
+				T & T &F&F&F&T&T\\
+				T & F &F&T&F&T&T\\
+				F & T &T&F&F&T&T\\
+				F & F &T&T&T&F&F\\
+			\end{array}	
+		\end{displaymath}
+
+	Since the truth values are identical in the last two columns, we can conclude that $x \lor y$ is equalvalent to $ \lnot ( \lnot x \land \lnot y ) $, which only composed of two basic operations $\land$ and $\lnot$. 
+	\end{proof}
+	\item
+	Consider the Boolean Operation called \emph{nand}, denoted $\barwedge$. Define $x \barwedge y$ to be $\lnot (x\land y)$. Do the following:
+	\begin{enumerate}
+		\item Construct the truth table for \emph{nand}.
+		\begin{solution}
+				\begin{displaymath}
+				\begin{array}{c|c|c|c|c}
+					x & y & x \land y& \lnot ( x \land y) &x \barwedge y\\
+					\hline  
+					T & T &T&F&F\\
+					T & F &F&T&T\\ 
+					F & T &F&T&T\\
+					F & F &F&T&T\\
+				\end{array}	
+			\end{displaymath}
+
+		\end{solution}
+		\item Is \emph{nand} commutative? Associative?
+		\begin{solution}
+			\begin{displaymath}
+			\begin{array}{c|c|c|c}
+				x & y & x \barwedge y& y \barwedge x\\
+				\hline  
+				T & T &F&F\\
+				T & F &T&T\\ 
+				F & T &T&T\\
+				F & F &T&T\\
+			\end{array}	
+		\end{displaymath}
+		Since the truth values are identical in the last two columns, we can conclude that $ x \barwedge y = y \barwedge x$, or  \emph{nand} is commutative.
+			\begin{displaymath}
+		\begin{array}{c| c| c|c|c|c|c}
+			x & y & z & x \barwedge y & y \barwedge z & (x \barwedge y) \barwedge z & x \barwedge (y \barwedge z) \\ % Use & to separate the columns
+			\hline  % Put a horizontal line between the table header and the rest.
+			T & T & T&F&F &T&T\\
+			T & T & F &F &T&T&F\\
+			T & F & T &T &T&F&F\\
+			T & F & F &T &T&T&F\\
+			F & T & T&T&F&F&T\\
+			F & T & F &T&T&T&T\\
+			F & F & T &T & T&F&T\\
+			F & F & F &T &T&T&T\\
+		\end{array}	
+	\end{displaymath}
+		Since the truth values are not identical in the last two columns(i.e when $x,y,z$ are $T,T,F$ respectively, we have $T$ for$(x \barwedge y) \barwedge z$ but $F$ for $ x \barwedge (y \barwedge z)$ ), we cannot conclude that $ (x \barwedge y) \barwedge z = x \barwedge (y \barwedge z)$. Hence,  \emph{nand} is not assoicative.
+				\end{solution}
+		\item Show that $x \land y$ and $\lnot x$ can be reexpressed in terms of just $\barwedge$.
+		\begin{proof}
+			$\lnot x$ is true whenever $x$ is false and vice versa. Observing the truth table in problem b, we can find that $x \barwedge y$ is  false when $x$ and $y$ are both true while  $x \barwedge y$ is  true when $x$ and $y$ are both false. Hence, we purpose	$\lnot x$ is equivalent to $x \barwedge x$.
+		
+	
+\begin{displaymath}
+	\begin{array}{c|c|c}
+		x &  x \barwedge x&\lnot x\\
+		\hline  
+		T & F&F\\
+		F & T&T\\ 
+	\end{array}	
+\end{displaymath}
+	Since the truth values are not identical in the last two column, we can conclude that $\lnot x$ is equivalent to $x \barwedge x$. Hence,  $\lnot x$  can be reexpressed only using $\barwedge$. Noticing that $x \land y$ has the exact opposite truth value of all pairs of inputs compared with $x \barwedge y$. Therefore, we can reexpress $x \land y$ as $\lnot (x \barwedge y)$. From the conclusion above, we know that it is equivalent to $(x \barwedge y) \barwedge (x \barwedge y)$.
+	\begin{displaymath}
+		\begin{array}{c|c|c|c|c|c}
+			x & y &x \land y & x \barwedge y& \lnot ( x \barwedge y) &(x \barwedge y) \barwedge (x \barwedge y)\\
+			\hline  
+			T & T &T&F & T&T\\
+			T & F &F&T&F&F\\ 
+			F & T &F&T&F&F\\
+			F & F &F&T&F&F\\
+		\end{array}	
+	\end{displaymath}
+ 	Hence,  $x \land y$  can be reexpressed only using $\barwedge$ as well.
+		\end{proof}
+		\item With the above discovery, what can you say about all binary Boolean operations?
+		\begin{solution}
+			Boolean operations can be reexpressed by the combination of others. For example, using $\barwedge$ alone, we are able to represent $\land$ and $\lnot$. Then, we can have combination of $\land$ and $\lnot$ to represent $\lor$ which we proved in problem 4. Then, using these three basic operations, we can express all possible Boolean operations, which we proved in problem 3.
+		
+ 	\end{solution}
+	\end{enumerate}
+\end{enumerate}
+\end{document}

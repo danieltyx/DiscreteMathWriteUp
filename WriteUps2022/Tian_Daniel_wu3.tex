@@ -1,0 +1,276 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{10/3/22}
+\chead{\bf \large Write Up 3}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+	\begin{enumerate}
+		    \item 
+		Let $n$ be a positive integer. Prove that $n^2 = (n)_2 + n$ in the following two ways.
+		
+		\begin{enumerate}[label=(\alph*)]
+			\item 
+			First, show it is true algebraically.
+			\begin{solution}
+			\begin{align*}
+			    &(n)_2 + n\\
+				&= n(n-1) + n\\
+				&= n^2 - n + n\\
+				&= n^2
+			\end{align*}
+		\end{solution}
+		
+			\item
+			Second, interpret the terms $n^2$ and $(n)_2$, and $n$ in the context of list counting and then argue that the equation must be true.
+			\begin{proof}
+					According to theorem 8.6 from the textbook, we know that the number of lists of length $2$ are chosen from a pool of $n$ possible elements is $n^2$ if the repetitions are permitted and $(n)_2$ if repetitions are forbidden.
+					Hence, we can state that the $n^2$ number of lists are composed to both lists with and without repeated elements. Since we are considering lists of length 2, the only case for repeatitive elements are two exactly same elements, which we have $n$ possible cases. Therefore, considering both lists with and without repeatitive elements, we have $(n)_2 + n$, which have to equal $n^2$, number of all possible lists of length 2. 
+			\end{proof}
+		
+			
+		\end{enumerate}
+		
+		\item
+		Prove that all of the following numbers are composite.
+		\[1000! + 2,  1000! + 3,  1000! + 4, . . . ,  1000! + 1002.\]
+		\begin{proof}
+		We can rewrite numbers above as \[2 \times (\frac{1000!}{2} + 1), 3\times (\frac{1000!}{3} + 1),4 \times(\frac{1000!}{4} + 1),..., 1002 \times (\frac{1000!}{1002} + 1) \]. \\Clearly, $1000!$ is divisble by $2,3,4,....1000$ because all of these numbers are factors of $1000!$. In addition, $1000!$ is divisble by 1001 beceause $1001=7*11*13$, which are factors of $1000!$. Similarly, $1000!$ is divisble by 1002 because $1002=2*501$, which are also factors of $1000!$. Hence, $\cfrac{1000!}{2} ,\cfrac{1000!}{3} ,\cfrac{1000!}{4},...,\cfrac{1000!}{1002} $ are integers and $\cfrac{1000!}{2} +1 ,\cfrac{1000!}{3} +1 ,\cfrac{1000!}{4} +1 ,...,\cfrac{1000!}{1002} +1$ are integers. The original numbers are hence product of two integers. They are respectivelly divisble by $2,3,4,...,1002$ which is greater than 1 and less than the number itself. Therefore, by definition, all the numbers are composite.
+	\end{proof}
+		
+		\item
+		The double factorial $n!!$ is definted for odd positive integers $n$; it is the product of all the odd numbers from 1 to $n$ inclusive. For example, $7!! = 7 \times 5 \times 3 \times 1 = 105$. Answer
+		the following:
+		\begin{enumerate}[label=(\alph*)]
+			\item 
+			Evaluate $9!!$.
+			\begin{solution}
+				\[ 9!! = 9\times 7\times 5\times 3\times 1 = 945 \]
+			\end{solution}
+			\item
+			For an odd integer $n$, are $n!!$ and $(n!)!$ equal?
+			\begin{solution}
+
+				\[n! = n(n-1)(n-2)...(1)\]
+				\[n!!   = n(n-2)(n-4)(n-6)...(1)\]
+				Observing the equation above, we can notice that $n!>n!!$ because $\cfrac{n!}{n!!} =   (n-1)(n-3)...2$, which will be greater than 1 for odd any $n$ greater than 1. 
+				\[	(n!)! = n!(n!-1)(n!-2)(n!-3)...(1)\]
+				$(n!)!$, however, is greater than $n!$ because $\cfrac{(n!)!}{n!} =(n!-1)(n!-2)(n!-3)...(1) $, which will be greater than 1 for odd any $n$ greater than 1. 
+				Hence, for odd integer greaters than 1, $n!!$ is less than $n!$ and $(n!)!$ is greater than $n!$. $n!!$ cannot be equal to $(n!)!$.
+			\end{solution}
+			
+			\item
+			Write an expression for $n!!$ using product notation.
+			\begin{solution}
+
+				Since $n!!$ is the product of odd integers, we can represent it as $2k+1$ where it starts at 1 and ends at $n$. We know that when $2k+1=0$, $k=0$ and when $2k+1=n$, $k=\frac{n-1}{2}$ by solving the equation. Hence, we can write the product notation as below.
+				
+				\[ n!! = \prod_{k=0}^{\frac{n-1}{2}} (2k+1) \]
+		
+				\end{solution}
+			
+			\item
+			Explain why the following formula works:
+			\[ (2k-1)!! = \frac{(2k)!}{k!2^k} \].
+			\begin{proof}
+				If we can proof $ \cfrac{(2k)!}{k!2^k} = (2k-1)!! $ then $(2k-1)!! = \cfrac{(2k)!}{k!2^k}$ must be true as well.
+				\begin{align*}
+					 &\cfrac{(2k)!}{k!2^k} \\
+					&=\cfrac{2k\cdot (2k-1)\cdot(2k-2)\cdot(2k-3)\cdot(2k-4)...\cdot 1}{k\cdot(k-1)\cdot(k-2)...\cdot1\cdot 2^k}	\\
+					&=\cfrac{2\cdot k\cdot (2k-1)\cdot 2\cdot(k-1)\cdot (2k-3) \cdot 2\cdot(k-2)...\cdot 1}{k\cdot(k-1)\cdot(k-2)...\cdot1\cdot 2^k}					 \\
+					&=\cfrac{2^k \cdot k\cdot \cdot(k-1) \cdot(k-2)... \cdot 1 \cdot (2k-1) \cdot(2k-3)...\cdot 1}{k\cdot(k-1)\cdot(k-2)...\cdot1\cdot 2^k}					 \\
+					&=\cfrac{  k\cdot \cdot(k-1) \cdot(k-2)... \cdot 1 \cdot (2k-1) \cdot(2k-3)...\cdot 1}{k\cdot(k-1)\cdot(k-2)...\cdot1}					 \\
+					&=(2k-1) \cdot (2k-3) ... \cdot 1\\
+					&= (2k-1)!!
+				\end{align*}
+			Hence, $ \cfrac{(2k)!}{k!2^k} = (2k-1)!! $  and $(2k-1)!! = \cfrac{(2k)!}{k!2^k}$ is true.
+			\end{proof}
+			
+			
+		\end{enumerate}
+		
+		\item
+		Evaluate the following integral for $n = 0, 1, 2, 3, 4$:
+		\[ \int_{0}^{\infty} x^ne^{-x} \,dx \]
+		(Note: The case $n = 0$ is easiest. Do the remaining values of $n$ in order, and use integration by parts.) What is the value of this integral for an arbitrary natural number $n$? Using a calculation device, evaluate the integral for $n = \frac{1}{2}$. What is surprising about your ability to compute this, given your conclusion to the previous question?
+		
+	  \begin{solution}
+	  	When $n=0$, $x^n = 1$. Hence, we need to evaluate $\int_0^\infty e^{-x} dx$
+	  	\begin{align*}
+		&\int_0^\infty e^{-x} dx\\
+		&= -e^{-x} \bigg |^\infty_0\\
+		&= ( -e^{\infty}-(-e^0)) \\
+		&=1
+	  	\end{align*}
+  		When $n=1$, $x^n= x$. Hence, we need to evaluate $\int_0^\infty x e^{-x} dx$. Let $u=x and dv=e^{-x}$, hence we will have $du= d(x) = 1$ and $v = \int dv = -e^{-x} $. Using integration by parts, we will have:
+  		\begin{align*}
+  			&\int_0^\infty x e^{-x} dx\\
+  			&= (-xe^{-x} ) \bigg |_0^\infty - \int^\infty_0 -e^{-x} dx \\
+  			&=(0+0) + e^{-x} \bigg |^\infty_0\\
+  			&=1
+  		\end{align*}
+  		When $n=2$, $x^n= x^2$. Hence, we need to evaluate $\int_0^\infty x^2 e^{-x} dx$. Let $u=x^2 and dv=e^{-x}$, hence we will have $du= d(x^2) = 2x$ and $v = \int dv = -e^{-x} $. Using integration by parts, we will have:
+	  	\begin{align*}
+	  		&\int_0^\infty x^2 e^{-x} dx\\
+	  		&= (-x^2 e^{-x} ) \bigg |_0^\infty - \int^\infty_0 -2x e^{-x} dx\\
+	  		&=(0+0) + 2 \int^\infty_0 x e^{-x} dx\\
+	  	\end{align*}
+	     From the last integration, we know that $\int^\infty_0 x e^{-x} dx = 1$. Hence the result for $\int_0^\infty x^2 e^{-x} dx$ is $0+2=2$.\\
+			When $n=3$, $x^n= x^3$. Hence, we need to evaluate $\int_0^\infty x^3 e^{-x} dx$. Let $u=x^3 and dv=e^{-x}$, hence we will have $du= d(x^3) = 3x^2$ and $v = \int dv = -e^{-x} $. Using integration by parts, we will have:
+		\begin{align*}
+			&\int_0^\infty x^3 e^{-x} dx\\
+			&= (-x^3 e^{-x} ) \bigg |_0^\infty - \int^\infty_0 -3x^2 e^{-x} dx \\
+			&=(0+0) +  3 \int_0^\infty x^2 e^{-x} dx\\
+		\end{align*}
+	From the last integration, we know that $\int_0^\infty x^2 e^{-x} dx = 2$. Hence the result for $\int_0^\infty x^3 e^{-x} dx$ is $0+3 \times2=6$.\\
+
+		When $n=4$, $x^n= x^4$. Hence, we need to evaluate $\int_0^\infty x^4 e^{-x} dx$. Let $u=x^4 and dv=e^{-x}$, hence we will have $du= d(x^4) = 4x^3$ and $v = \int dv = -e^{-x} $. Using integration by parts, we will have:
+	\begin{align*}
+		&\int_0^\infty x^4 e^{-x} dx\\
+		&= (-x^4 e^{-x} ) \bigg |_0^\infty - \int^\infty_0 -4x^3 e^{-x} dx \\
+		&=(0+0) +  4 \int_0^\infty x^3 e^{-x} dx\\
+	\end{align*}
+	From the last integration, we know that $\int_0^\infty x^3 e^{-x} dx = 6$. Hence the result for $\int_0^\infty x^4 e^{-x} dx$ is $0+4 \times 6=24$.\\
+	
+		We can observe that when $n=0$, the value is $1=0!$, when $n=1$, the value is $1=1!$, when $n=2$, the value is $2=2!$, when $n=3$, the value is $6=3!$, and  when $n=4$, the value is $24=4!$.	Base on the pattens above, for an arbitary natural number $n$, the value of this integral will be $n!$ When $n=\frac{1}{2}$, the result is $\frac{\sqrt{\pi}}{2}.$ base on the calculator. It is surprising because using the integration, we found the way to evaluate factorial of a fraction(i.e. $\frac{1}{2}!=\frac{\sqrt{\pi}}{2}$).
+	  \end{solution}
+		
+		
+		
+		
+		\item
+		Let $A$, $B$, and $C$ be sets, and suppose $A \subseteq B$, $B \subseteq C$, and $C \subseteq A$. Prove that $A = C$.
+		\begin{proof}
+			Suppose $A$, $B$, and $C$ are sets, and $A \subseteq B$, $B \subseteq C$, and $C \subseteq A$. \\Assuming $A$ is an empty set, we can conclude that $A \subseteq C$ because an empty set is a subset of every set, and the only possible case for both $A \subseteq C$ and $C \subseteq A$ to be true is when $A=C$.\\
+			Assming $A$ is not an empty set, let $x \in A$. We also know that every element of A is an element in B because A is a subset of B, hence $x \in B$. Similarly, every element of B is an element in C, hence $x \in C$. Therefore, every element of A is an element of C, which by definition, A is a subset of C, $ A \subseteq C$. We also know that $ C \subseteq A$, which implies every element of C is an element of A. The only possible case for both $A \subseteq C$ and $C \subseteq A$ to be true is when $A=C$.
+			
+			Set A has to be either empty or not empty. In both case, we proved that $A=C$.
+		
+			\end{proof}
+	\end{enumerate}
+\end{document}

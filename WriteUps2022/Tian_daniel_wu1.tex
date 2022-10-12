@@ -1,0 +1,180 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{9/19/22}
+\chead{\bf \large Write Up 1}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+\begin{enumerate}
+	\item 
+	Prove that an integer is odd if and only if it is the sum of two consecutive integers.
+	\begin{proof}
+		Let $x$ be the integer\\
+		($\Rightarrow$) Suppose $x$ is odd, so there is an integer $a$ such that $x = 2a+1$. $x=2a+1=a+a+1=a+(a+1)$, and since $a$ is integer, $a+1$ must also be a integer. Hence, $x$ is the sum of two consecutive integers $a$ and $a+1$.\\
+		($\Leftarrow$) Suppose $x$ is the sum of two consecutive integers. Let the two consecutive integer be $a$ and $a+1$. Then, we have $x=a+(a+1)=2a+1$. By defination, $x$ is an odd number.
+	\end{proof}
+	\item 
+	Let $x$ and $y$ be integers. Prove that $x \leq y-1$ if and only if $x<y$.
+	\begin{proof}
+		Let $x$ and $y$ be integers. \\
+		($\Rightarrow$) Suppose $x \leq y-1$. It indicates $y-x \geq 1$ after organize it according to the property of inequalities. Since  $1>0$, we have 	$y-x \geq 1 > 0 $ and hence $y-x >0$. Move $x$ to the opposite side, we can conclude that $x<y$.\\
+		($\Leftarrow$) Suppose $x<y$. This indicates that $y-x>0$. We know that $y-x$ is integer since both $y$ and $x$ are integers.	Sinice there difference is greater than zero and is a integer, it needs to be at least 1. Hence, we have $y-x\geq 1$
+		\begin{align*}
+			y-x &\geq 1\\
+			1 &\leq y-x \\
+			x+1 &\leq y\\
+			x &\leq y-1\\
+		\end{align*}
+		By organizing the inequality, we can conclude that $x \leq y-1$.
+	\end{proof}
+
+\item Let $a$ be an integer. Prove that $a$ is odd if and only if there is an integer $x$ such that $a = 2x - 1$.	\begin{proof}
+		Let $a$ be an integer. \\
+		($\Rightarrow$) Suppose $a$ is odd. By defination, there exist an integer $b$ such that $a=2b+1$.
+		Let integer $x=b+1$. We can rewrite $a=2b+1 = 2(b+1) -1 = 2x-1$.
+		Hence, we can conclude $a=2x-1$.  \\
+	   ($\Leftarrow$) Suppose there is an integer $x$ such that $a=2x-1$. We can rewrite it as $a=2(x-1)+1$.
+	   Let integer $y=x-1$. Then, we will have $a=2y+1$, and a is odd clearly.
+\end{proof}
+
+	\item Prove that the difference between consecutive perfect squares is odd.
+	\begin{proof}
+		Let x be an integer. Then $x^2$ and $(x+1)^2$ must be consecutive perfect square. Let $a$ be there difference and $a = (x+1)^2-x^2$. 
+		\begin{align*}
+			&= (x+1)^2-x^2 \\
+			&=  x^2 + 2x+1-x^2\\
+			&= 2x+1\\
+		\end{align*}
+		Therefore, $a=2x+1$, by defination, $a$ is odd and hence the difference is odd. 
+	\end{proof}
+	\item Disprove the proposition: Two right triangles have the same area is and only if the lengths of their hypotenuses are the same.
+	\begin{proof}
+		Let the first triangle has legs of 4 and 6 and the second triangle has legs of 3 and 8. They have the same area $4*6*\frac{1}{2} = 3*8*\frac{1}{2} = 12$. However, the hypotenuse of the first triangle is $\sqrt{4^2+6^2} =\sqrt{52}$ and the hypotenuse of the second triangle is $\sqrt{3^2+8^2} =\sqrt{73}.$ Obviously, $\sqrt{52} \ne \sqrt{73}$ according the Pythagorean theorem . Hence, the length of their hypotenuses are not the same, the statement is disproved. 
+	\end{proof}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,211 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{10/3/22}
+\chead{\bf \large Write Up 3}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+	\begin{enumerate}
+		\item 
+		Let $n$ be a positive integer. Prove that $n^2 = (n)_2 + n$ in the following two ways.
+		
+		\begin{enumerate}[label=(\alph*)]
+			\item 
+			First, show it is true algebraically.
+			\begin{solution}
+				\begin{align*}
+					n^2 &= (n)_2 + n\\
+					&= n(n-1) + n\\
+					&= n^2 - n + n\\
+					&= n^2
+				\end{align*}
+			\end{solution}
+			\item
+			Second, interpret the terms $n^2$ and $(n)_2$, and $n$ in the context of list counting and then argue that the equation must be true.
+			\begin{solution}
+				$n^2$ refers to the number of ways a 2-element list can be formed out of $n$ digits, where repetition is allowed.\\
+				$(n)_2$ is the number of ways a 2-element list can be formed out of $n$ digits without repetition, and $n$ is the number of repeated 2-element lists. Therefore, by adding $(n)_2$ and $n$ together, we get the total number of ways a 2-element list can be formed out of $n$ digits regardless of repetition, which is the same concept as $n^2$.
+			\end{solution}
+			
+		\end{enumerate}
+		
+		\item
+		Prove that all of the following numbers are composite.
+		\[1000! + 2,  1000! + 3,  1000! + 4, . . . ,  1000! + 1002.\]
+		\begin{proof}
+			We can rewrite the numbers in the proposition into $(1000!+n)$, where $n\in \Z$ and $2\leq n\leq 1002$. Thus, we conclude that $n|(1000!+n)$, when $2\leq n\leq 1000$\\
+			Notice that when $2\leq n\leq 1000$, $n$ is always a factor of $(1000!)$ by the definition of factorial. Thus, we can rewrite the expression into \[ n\times (\frac{1000!}{n}), \] where it is guaranteed $\displaystyle \frac{1000!}{n}\in \Z$.\\
+			When $n=1001$, we find that $7\times 143 = 1001$. Since $2\leq 7\leq 1000$, implying 7 is also a factor of $1000!$, we get that $\displaystyle 1000!+1001 = 1000!+7\times 143 = 7\times \frac{1000!}{7}$. Thus, $7|(1000!+1001)$.\clearpage
+			Likewise, since $2\times 501 = 1002$, we conclude that $2|(1000!+1002)$.\\ 
+			In conclusion, there always exists an integer $a$ such that $a|(1000!+n)$, where $2\leq n\leq 1002$, and $1<a\leq (1000!+n)$, which is the definition of the composite number.
+		\end{proof}
+		
+		\item
+		The double factorial $n!!$ is definted for odd positive integers $n$; it is the product of all the odd numbers from 1 to $n$ inclusive. For example, $7!! = 7 \times 5 \times 3 \times 1 = 105$. Answer
+		the following:
+		\begin{enumerate}[label=(\alph*)]
+			\item 
+			Evaluate $9!!$.
+			\begin{solution}
+				\[ 9!! = 9\times 7\times 5\times 3\times 1 = 945 \]
+			\end{solution}
+			
+			\item
+			For an odd integer $n$, are $n!!$ and $(n!)!$ equal?
+			\begin{solution}
+				\begin{align*}
+					n!!   &= n(n-2)(n-4)(n-6)...(n-n+1)\\
+					n!    &= n(n-1)(n-2)(n-3)...(n-n+1)\\
+					(n!)! &= n!(n!-1)(n!-2)(n!-3)...(n!-n!+1)\\
+				\end{align*}
+				Clearly, $\displaystyle n!!\neq (n!)!$. So they are not equal.
+			\end{solution}
+			
+			\item
+			Write an expression for $n!!$ using product notation.
+			\begin{solution}
+				\[ n!! = n(n-2)(n-4)(n-6)...(n-n+1) \]
+			\end{solution}
+			
+			\item
+			Explain why the following formula works:
+			\[ (2k-1)!! = \frac{(2k)!}{k!2^k} \].
+			
+			
+		\end{enumerate}
+		
+		\item
+		Evaluate the following integral for $n = 0, 1, 2, 3, 4$:
+		\[ \int_{0}^{\infty} x^ne^{-x} \,dx \]
+		(Note: The case $n = 0$ is easiest. Do the remaining values of $n$ in order, and use integration by parts.) What is the value of this integral for an arbitrary natural number $n$? Using a calculation device, evaluate the integral for $n = \frac{1}{2}$. What is surprising about your ability to compute this, given your conclusion to the previous question?
+		
+		\item
+		Let $A$, $B$, and $C$ be sets, and suppose $A \subseteq B$, $B \subseteq C$, and $C \subseteq A$. Prove that $A = C$.
+		
+	\end{enumerate}
+\end{document}
