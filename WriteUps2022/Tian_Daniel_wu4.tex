@@ -1,0 +1,237 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{10/24/22}
+\chead{\bf \large Write Up 4}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+	\begin{enumerate}
+		\item
+		Let $C$ and $D$ be nonempty sets. Prove that $C \times D = D\times C$ if and only if $C=D$. Why do we need the condition that $C$ and $D$ are nonempty?\\
+		    \begin{proof}
+		   	Let $C$ and $D$ be nonempty sets.\\
+			($\Rightarrow$)  Suppose $C \times D = D \times C$. Let $(x,y)$ to be an arbitrary ordered pair from set $C \times D$. Hence, $x \in C$ and $y \in D$. Since $C \times D = D\times C$ and $(x,y) \in C \times D$, $(x,y) \in D \times C$. It implies that for all $x$ in set $C$ is also in set $D$, and for all $y$ in set $D$ is also in set $C$. Therefore, $C \subseteq D$ and $D \subseteq C$. $C=D$ is the only possible result.		
+			
+			($\Leftarrow$) Suppose $C = D$. We can rewrite $C \times D$ as $D \times D$ and rewrite $ D \times C$ as $D \times D$ as well. Therefore, $C \times D = D \times D = D \times C$.
+			
+			If either $C$ or $D$ is empty and the another one is nonempty , $C \times D = D \times C = \emptyset$. However, empty set does not equal to another nonempty set, $ C \neq D$. The conclusion will not hold anymore without the condition $C$ and $D$ are nonempty.	
+	
+			\end{proof}
+		
+		\item
+		Find a condition for the sets $A$ and $B$ such that you can create a theorem of the form "Let $A$ and $B$ be sets. We have $A\backslash B = B\backslash A$ if and only if (your condition on $A$ and $B$). That is, you're looking to state and prove necessary and sufficient conditions for $A\backslash B = B\backslash A$.
+		
+		\begin{solution}
+	     	Let $A$ and $B$ be sets. We have $A \backslash B = B \backslash A$ if and only if $A=B$.\\
+			To prove the statement above, we need to prove in both directions:\\
+				($\Rightarrow$) Suppose $ A \backslash B = B \backslash A$. By defination, $A \backslash B$ is the set of all elements in A but not B and $B \backslash A$ is the set of all elements in B but not A. Hence,  $A \backslash B$ and  $B \backslash A$ disjoint. For disjoint set to be equal, they must both be empty. In this case, $A=B=\emptyset$.\\
+			($\Leftarrow$) Suppose $A=B$, and then $A\backslash B$ is equivalent to $A \backslash A$, which is the set of all elements in A but not A. Hence, empty set. Similarly., $B\backslash A$ is empty as well. Therefore, $A \backslash B = B \backslash A=\emptyset$.
+						\end{solution}
+		
+	\item 
+Let $A$ be a set. The \emph{complement} of $A$ denoted $\overline{A}$ or $A^C$ is defined as the set of all objects that are not in $A$. This can be problematic, as this can include literally anything at all: the "complement" of the set \{1, 2\} could include the number -3 as easily as it could include your cell phone. We then must specify the set $U = $\emph{universe} in which the set exists if we are to discuss the complement of the set within that universe. So if we are talking about $U = \mathbb{Z}$ for our previous example, then the complement of \{1,2\} would be $\mathbb{Z} \backslash$ \{1,2\}; however if we were using $\mathbb{R}$ as our universe, the complement would be $\mathbb{R} \backslash \{1,2\}$.\\
+	Prove the following about set complements, assuming $A, B, C \subseteq U$.
+	\begin{enumerate}[label=(\alph*)]
+		\item
+		$A = B$ if and only if $\overline{A} = \overline{B}$
+		\begin{proof}
+			Let $A$ and $B$ be two sets.\\
+			($\Rightarrow$) Suppose $A = B$. We can write $\overline{A}$ as $U - A$ and $\overline{B}$ as $U - B$. Given $A = B$, we can conclude that $U - A = U - B $ and hence $\overline{A} = \overline{B}$.\\
+			($\Leftarrow$ )Suppose  $\overline{A} = \overline{B}$. We also know that $\overline{A} = U - A$ and $ \overline{B} = U - B $. Therefore, $U - A = U - B$ and $A=B$.
+		\end{proof}
+		
+		\item
+		$\overline{\overline{A}} = A$
+		\begin{proof}
+			Let $A$ be a set. We know that $\overline{A} = U - A$ and $\overline{\overline{A}} = U - \overline{A} = U - (U - A) =A$ by the definition of the complement set.
+		\end{proof}
+		
+		\item
+		$\overline{A \cup B \cup C} = \overline{A} \cap \overline{B} \cap \overline{C}$
+		\begin{proof}
+			Let $A$, $B$, and $C$ be sets.\\
+			Let  $x\in \overline{A \cup B \cup C}$. We know that $x\notin A\cup B\cup C$. It implies that $x\notin A$, $x\notin B$, and $x\notin C$ by the definition of the complement set. Hence, $x\in \overline{A}$, $x\in \overline{B}$, and $x\in \overline{C}$, implies that $x\in  \overline{A} \cap \overline{B} \cap \overline{C}$. Therefore, every elements in $ \overline{A \cup B \cup C}$ is also in $\overline{A} \cap \overline{B}$, $ n \overline{A \cup B \cup C}\subseteq \overline{A} \cap \overline{B}$.\\
+			
+			
+			Let  $x \in  \overline{A} \cap \overline{B} \cap \overline{C}$. It implies from the definition of intersects that $x$ is in $\overline{A}$,$\overline{B}$ and $\overline{C}$. Hence, $x$ is $\notin$ $A$, $x$  $\notin$ $B$ and $x\notin C$, or we can write it out as $x$ is not in $A$, $x$ is not in $B$, and $x$ is not in $C$. According to the De Morgan's Law, we can conclude that $x$ is not in A, B or C. Hence, $x \in \overline{A \cup B \cup C}$. Therefore, every elements in $  \overline{A} \cap \overline{B} \cap \overline{C}$ is also in $\overline{A \cup B \cup C} $, $  \overline{A} \cap \overline{B} \cap \overline{C}\subseteq \overline{A \cup B \cup C}$ .\\
+		
+			  $\overline{A \cup B \cup C}$ and $\overline{A} \cap \overline{B} \cap \overline{C}$ are mutually subset of each other, which implies that 		$\overline{A \cup B \cup C} = \overline{A} \cap \overline{B} \cap \overline{C}$.
+		\end{proof}
+		
+	\end{enumerate}
+	\clearpage
+	\item
+	Let $A$, $B$, and $C$ denote sets. Prove the following:\\
+	\begin{enumerate}
+		\item $A\times (B \cup C) = (A\times B)\cup (A \times C)$\\
+		\begin{proof}
+		\begin{align*}
+			&A\times (B \cup C)\\
+			&\text{By definition of Cartesian product:}\\
+			&=\{(x,y)| (x \in A) \wedge  (y \in (B\cup C)\}\\
+			&\text{Then, by definition of Union:}\\   
+			&=\{(x,y)| (x \in A) \wedge  ((y \in B) \vee (y \in C)) \}\\
+			&\text{Distruibute the and operator using the distributive property of boolean algebra:}\\
+			&=\{( (x,y)| (x \in A) \wedge (y \in B)) \vee( (x \in A) \wedge(y \in C)))\}\\
+			&\text{We can rewrite it into two sets:}\\
+			&=\{(x,y)|(x \in A) \wedge (y \in B)\}	\cup 	\{(x,y)| (x \in A) \wedge(y \in C)\}\\
+			&=(A \times B) \cup (A \times C)
+		\end{align*}
+			\end{proof}
+		\item $A\times (B\cap C) = (A\times B) \cap (A \times C)$\\
+		\begin{proof}
+Let $(x,y)$ to be an arbitrary ordered pair from set $A\times (B\cap C)$, $(x,y) \in A\times (B\cap C) $. Then, we can state that $x \in A$ and $y \in (B\cap C)$. By the definition of intersect, since $y \in (B\cap C)$,  $y \in B$ and $y \in C$ is true. By the distributive property, ($x \in A$ and $y \in B$) and ($x \in A$ and $y \in C$) has to be true as well. Putting $x$ and $y$ in ordered pair, we have $(x,y) \in (A \times B)$ and $(x,y) \in (A \times C)$ from Cartesian Product. Therefore, $(x,y) \in (A\times B) \cap (A \times C)$ from the definition of intersection. Therefore, every elements in $A\times (B\cap C)$ is also in $(A\times B) \cap (A \times C)$, $A\times (B\cap C) \subseteq (A\times B) \cap (A \times C)$ \\
+	
+			Let $(x,y)$ to be an arbitrary ordered pair from set  $(A\times B) \cap (A \times C)$, $(x,y) \in (A\times B) \cap (A \times C) $. By definition of intersection, we can conclude that $(x,y) \in A \times B$ and $(x,y) \in A\times C$. $x$, in this case, is in A, and $y$ is in $B$ and $y$ is in $C$, $y \in B$ and $y \in C$. By definition of union, we can say that $y \in B \cup C$. Putting $(x,y)$ into ordered pair, we can conclude $(x,y) \in A \times (B \cup C)$ from Cartesian Product. Therefore, every elements in $(A\times B) \cap (A \times C)$ is also in $A\times (B\cap C)$, $ (A\times B) \cap (A \times C) \subseteq A\times (B\cap C) $.\\
+		
+			  $A\times (B\cap C)$ and $(A\times B) \cap (A \times C)$ are mutually subset of each other, which implies that $A\times (B\cap C) = (A\times B) \cap (A \times C)$.
+				\end{proof}
+		
+		\item $A \times (B - C) = (A\times B) - (A\times C)$\\
+		\begin{proof}
+				Let $(x,y)$ to be an arbitrary ordered pair from set $A \times (B - C)$. Then, we can state that $x \in A$ and $y \in (B - C)$. The set $B-C$ includes all all elements in set $B$ but not in set $C$, or we can write as $y \in B$ and $y \notin C$. From $x \in A$ and $y \in B$, we can conclude that $(x,y) \in A \times B$ by Cartesian Product, and from $x \in A$ and $y \notin C$, we can conclude that $(x,y) \notin A \times C$ by Cartesian Product. Hence, to satisfy both statements, it implies that $ (x,y) \in (A\times B) -(A\times C)$. Therefore, every elements in $A \times (B - C)$ is also in $(A\times B) - (A\times C)$, $ A \times (B - C) \subseteq (A\times B) - (A\times C)$.\\\
+				
+				Let $(x,y)$ to be an arbitrary ordered pair from set $ (A\times B) - (A\times C)$. Then, we can state that $(x,y) \in  (A\times B)$ and $(x,y) \notin (A\times C)$. Hence, ($x \in A$ and $y \in B$) and not ($x \in A$ and $y \in C$).	By the De Morgan's Law, we can conclude that ($x \in A$ and $y \in B$) and  ($x \notin A$ or $y \notin C$). Since $x \in A$ must be true, $y \notin C$. Therefore, $x \in A$, $y \in B$ and $y \notin C$. It implies that $(x,y) \in A \times (B-C)$ from Cartesian Product. Therefore, every elements in $(A\times B) - (A\times C)$ is also in $A \times (B - C)$, $ (A\times B) - (A\times C)\subseteq A \times (B - C)$.\\
+				
+			 $A \times (B - C)$ and $ (A\times B) - (A\times C)$ are mutually subset of each other, which implies that $A \times (B - C) =  (A\times B) - (A\times C)$.
+		
+					\end{proof}
+		
+		
+		\item $A \times (B \Delta C) = (A\times B) \Delta (A\times C)$ \\
+		\begin{proof}
+				Let $(x,y)$ to be an arbitrary ordered pair from set $A \times (B \Delta C)$. Then, we can state that $x \in A$ and $y \in (B \Delta C)$. The elements in set $B \Delta C$ includes everything in B and in C but not in both B and C. We can represent using symbol $ y 
+				\in B \cup C$ and $y \notin B \cap C$. Hence, $(x,y)$ is either in $A \times B$ or $ A\times C$ but not in both. By definition of symmetric difference, we will have $(x,y) \in  (A\times B) \Delta (A\times C)$. Therefore, every elements in $A \times (B \Delta C) $ is also in $ (A\times B) \Delta (A\times C)$, $ A \times (B \Delta C) \subseteq  (A\times B) \Delta (A\times C)$.\\
+				
+				Let $(x,y)$ to be an arbitrary ordered pair from set $(A\times B) \Delta (A\times C)$. Then, we can state that $x \in A$ and $y \in B$ or $y \in C$ and $y \notin (B \cap C)$. By definition of symmetric difference, we can conclude that $y \in (B \Delta C)$. Hence, $(x,y) \in A \times (B \Delta C)$ by Cartesian Product. Therefore, every elements in $ (A\times B) \Delta (A\times C)$ is also in $ A \times (B \Delta C) $, $  (A\times B) \Delta (A\times C) \subseteq  A \times (B \Delta C) $.\\
+				
+				 $A \times (B \Delta C)$ and $ (A\times B) \Delta (A\times C)$ are mutually subset of each other, which implies that $A \times (B \Delta C) = (A\times B) \Delta (A\times C)$.
+		\end{proof}
+	\end{enumerate}
+\end{enumerate}
+\end{document}
