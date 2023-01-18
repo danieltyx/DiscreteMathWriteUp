@@ -1,0 +1,208 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{11/28/22}
+\chead{\bf \large Write Up 5}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+	\begin{enumerate}
+		\item Prove a relation $R$ on a set is antisymmetric if and only if
+		\[R\cap R^{-1}\subseteq \{(a,a)\mid a\in A\}\]
+		\begin{proof}
+			($\Rightarrow$)Suppose R on a set is antisymmetric. Let $(x,y) \in R\cap R^{-1}$. Hence, $(x,y) \in R$ and $(x,y) \in R^{-1}$. By the defefinition of inverse relation, we can conclude that $(y,x) \in R$. Since R is antisymmetric and $(x,y) \in R$ and $(y,x) \in R$ are both true, we can say $x = y$. For all $(x,y) \in R\cap R^{-1}$, we have $(x,y) \in \{ (a,a)\mid a\in A\}$. Therefore, $R\cap R^{-1}\subseteq \{(a,a)\mid a\in A\}$.\\
+			($\Leftarrow$) Suppose $R\cap R^{-1}\subseteq \{(a,a)\mid a\in A\}$. We can say that for all $(x,y) \in R\cap R^{-1}$, $(x,y) \in \{(a,a)\mid a\in A\}$. It implies $x=y$. We also know that $(x,y) \in R$ and $(x,y) \in R^{-1}$ by definition of intersection, which indicates that $(y,x) \in R$. For all $(x,y) \in R$ and $(y,x) \in R$, it implies $x=y$. Therefore, R is antisymmetric. 
+				
+	\end{proof}
+		
+		\item Let $R$ be an equivalence relation on a set $A$. Prove that the union of all $R$'s equivalence classes is $A$: that is, prove
+		\[\bigcup_{a\in A}[a]=A\]
+		\begin{proof}
+		($\Rightarrow$) Let $x\in \bigcup_{a\in A}[a]$, the union of all $R$'s equivalence classes. By the definition of union, there exist $a \in A$ such that $x \in [a]$. Since $[a]$ is the set of all elements of A related by R to a, $x\in A$. For all $x\in \bigcup_{a\in A}[a]$, $x \in A$. Therefore, $\bigcup_{a\in A}[a] \subseteq A$.\\
+		($\Leftarrow$) Let $x \in A$. We know R is an equivalence relation, hence $x \ R \  x$, or $(x,x) \in R$. It implies that $x$ is in relation with $x$ and hence 	$x \in [x]$. $[x]$ has to be in $\bigcup_{a\in A}[a]$ because it is the union for all equivalence classes and $[x]$ is one of them. Hence, $ [x] \in  \bigcup_{a\in A}[a]$ and since 	$x \in [x]$,  $ x \in \bigcup_{a\in A}[a]$. For all $x \in A$, $x\in \bigcup_{a\in A}[a]$.\\
+		Therefore, $A \subseteq \bigcup_{a\in A}[a] $. Since $\bigcup_{a\in A}[a] \subseteq A$ and $A \subseteq \bigcup_{a\in A}[a] $, $ \bigcup_{a\in A}[a] = A $ must be true.
+		
+
+		\end{proof}
+		
+		\item
+		\begin{enumerate}
+			\item Fourteen people join hands for a circle dance. In how many ways can they do this?
+			\begin{solution}
+				Let A be a set containing all possible arrangements. There are 14 people in the circle. Hence there are $14!$ possible ways to arrange them, which also indicates that the size of A is $14!$. Let R be a relation with $a \ R \ b$ implies a and b are identical arrangements. We know that R is equivalence relation since it is reflexive(a is identical to a), symmetric(if a is identical to b, then b is identical to a), and transitive(if a is identical to b and b is identical to c, then a,b and c are all idenetical). In all equivalence classes, the size will be 14 since an arbitrary arrangement will be the same as the other ones where all people move 1 to 14 positions left. By the Theorem 16.6, we can calculate the number of equivalence classes, or dinstive arrangements by dividing the size of the set A with the size of equivalence classes. Hence, there are $14!/14=13!$ possible ways.
+				
+				
+			\end{solution}
+			
+			\item Suppose seven of these people have red hair, and the remaining seven have black hair. In how many ways can they join hands for this same dance, assuming they alternate in hair color around the circle?
+			\begin{solution}
+				
+			   Let the people have red hair standing in a line and we can calculate that there are $7!$ possible ways to arrange them. Then, we can put the rest of people with black hair between people with red hair accrodingly and it will also have $7!$ possible ways to arrange them. Then, connects the first and last person forming a circle. Similar to the last problem, we can conclude that there are $7! \times 7!$ possible arrangements with 14 equivalence classes(as we shown above). Therefore, there will be $\frac{7! \times 7!}{14}$ ways.
+				
+				
+			\end{solution}
+		\end{enumerate}
+		
+		\item Considering the following formula:
+		\[k {n\choose k} = n {n-1\choose k-1} \]
+		Give two proofs of this formula: one proof using the factorial formula, and a second combinatorial proof.
+		
+		\begin{proof}
+			\begin{enumerate}
+				\item Factorial Formula\\
+				\begin{align*}
+					n {n-1 \choose k-1} &= n\cdot  \Big( \frac{(n-1)!}{(k-1)!(n-1-(k-1))!} \Big)\\
+					&= \frac{n!}{(k-1)!(n-k)!}\\
+					&= \frac{k\cdot n!}{k!(n-k)!}\\
+					&= k \cdot \Big( \frac{ n!}{k!(n-k)!} \Big)\\
+					&=k {n \choose k}
+				\end{align*}
+			\item Combinatorial proof\\
+		Questions: There are $n$ elements in the set with no label, and we need to select $k-1$ elements from it and label it "B" and one element and label it "A". Assuming each element can have one label and later one will override the former one, how many ways can we do it?\\
+		Left: First, labeling $k$ "B" from $n$ elements, we will have ${n \choose k}$ ways to do it. Then, label one "A" from $k$ elements, we will have ${k \choose 1}$ way to do it. Together, there are ${k \choose 1}\cdot {n \choose k} = k {n \choose k}$ ways.\\
+		Right: We first label one "A" from the $n$ elements set. There are ${n \choose 1} = n$ ways. Then, in the $n-1$ elements, we need to select $k-1$ elements and label it with "B". It can be represented as $ {n-1\choose k-1}$. Therefore, there are $n{n-1\choose k-1}$ ways to label.\\
+		Since both solutions answer the question correctly, $k {n \choose k} = n{n-1\choose k-1}$.
+		
+			\end{enumerate}
+		\end{proof}
+		\item Using the factorial formula for ${n\choose k}$, prove Pascal's Identity:
+		\[{n\choose k} = {n-1\choose k-1} + {n-1\choose k}\]
+		\begin{proof}
+			\begin{align*}
+				{n-1\choose k-1} + {n-1\choose k} &= \frac{(n-1)!}{(k-1)!(n-1-(k-1))!} + \frac{(n-1)!}{k!(n-1-k)!}\\
+				&= \frac{(n-1)!}{(k-1)!(n-k)!} + \frac{(n-1)!}{k!(n-1-k)!}\\
+				&=  \frac{k(n-1)!}{k!(n-k)!} + \frac{(n-1)!}{k!(n-1-k)!}\\
+				&=  \frac{k(n-1)!}{k!(n-k)!} + \frac{(n-k)(n-1)!}{k!(n-k)!}\\
+				&= \frac{k(n-1)! + (n-k)(n-1)!}{k!(n-k)!}\\
+				&= \frac{n(n-1)!}{k!(n-k)!}\\
+				&= \frac{n!}{k!(n-k)!}\\
+				& = {n\choose k}
+			\end{align*}
+		\end{proof}
+		
+	\end{enumerate}
+\end{document}

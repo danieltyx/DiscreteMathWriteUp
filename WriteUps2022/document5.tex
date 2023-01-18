@@ -1,0 +1,177 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+
+\DeclareUnicodeCharacter{2212}{-}
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Blanca Luo\\ Advanced Topics in Math, Foil}   
+\lhead{11/25/22}
+\chead{\bf \large Write Up 05}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+	\begin{enumerate}
+		\item Prove a relation $R$ on a set is symmetric if and only if
+		\[R\cap R^{-1}\subseteq \{(a,a)\mid a\in A\}\]
+		\begin{solution}
+			Let $A = \{1,2\}$, $R = \{(1,2),(2,1)\}$. By the definition of inverse relation, $R^{-1} = \{(2,1),(1,2)\}$ Then $R\cap R^{-1} = \{(1,2),(2,1)\}$. Clearly, $R$ is symmetric. However, $R\cap R^{-1} \not \subseteq \{(a,a)\mid a\in A\}$. Therefore, the proposition is not true.
+		\end{solution}
+		
+		\item Let $R$ be an equivalence relation on a set $A$. Prove that the union of all $R$'s equivalence classes is $A$: that is, prove
+		\[\bigcup_{a\in A}[a]=A\]
+		\begin{proof}
+			$\Rightarrow$ Let $x\in \bigcup_{a\in A}[a]$.\\
+			By the definition of union, $\exists a\in A$ such that $x\in [a]$.\\
+			Notice that, by the definition of equivalence class, $[a]$ only contains the elements that are in $A$ and related to $a$. Thus, $x\in [a]$ implies $x\in A$, and $\bigcup_{a\in A}[a]\subseteq A$.\\
+			$\Leftarrow$ Let $x\in A$.\\
+			By the definition of equivalence relation, $R$ is reflexive, meaning $(x,x)\in R$.\\
+			By the definition of equivalence class, $x\in [x]$.\\
+			Since $\bigcup_{a\in A}[a]$ is the union of all equivalence classes, it must contain $[x]$. Thus, $x\in [x]$ implies $x\in \bigcup_{a\in A}[a]$, and $A\subseteq \bigcup_{a\in A}[a].$\\
+			Therefore, \[\bigcup_{a\in A}[a]=A\].
+		\end{proof}
+		
+		\item
+		\begin{enumerate}[label=(\alph*)]
+			\item Fourteen people join hands for a circle dance. In how many ways can they do this?
+			\begin{solution}
+				If the 14 people stand in a line instead of in a close circle, there will be $14!$ ways to do this. \\
+				After they form a close circle from the line, it no longer matters which people to be counted first, which means there will be 14 equivalence classes. Then, there are $\frac{14!}{14} = 13!$ ways to do this.
+			\end{solution}
+			\clearpage
+			\item Suppose seven of these people have red hair, and the remaining seven have black hair. In how many ways can they join hands for this same dance, assuming they alternate in hair color around the circle?
+			\begin{solution}
+				Let the 7 red-hair people stand in a line first, and there are 7! ways to arrange this.\\
+				Let each of the 7 black-hair people stands in between two of the red-hair guys. There are also 7! ways for the black-hair people to stand. So there will be $7!\times 7!$ ways in total. \\
+				Now ask them to form a close circle from the line. It will no longer matter which people to be counted first, which means there will be 14 equivalence classes. Then, there are $\frac{7!\times 7!}{14} = \frac{6!\times 7!}{2}$ ways to arrange this.
+			\end{solution}
+		\end{enumerate}
+		
+		\item Considering the following formula:
+		\[k {n\choose k} = n {n-1\choose k-1} \]
+		Give two proofs of this formula: one proof using the factorial formula, and a second combinatorial proof.
+		
+		\item Using the factorial formula for ${n\choose k}$, prove Pascal's Identity:
+		\[{n\choose k} = {n-1\choose k-1} + {n-1\choose k}\]
+		
+	\end{enumerate}
+\end{document}
