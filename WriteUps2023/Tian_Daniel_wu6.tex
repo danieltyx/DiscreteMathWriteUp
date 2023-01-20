@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+\usepackage{amsfonts} 
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{1/19/22}
+\chead{\bf \large Write Up 6}
+\cfoot{Page \thepage}
+
+\begin{document}
+	\begin{enumerate}
+		\item Let $A$ and $B$ be sets. Prove by contradiction that $(A \setminus B) \cap (B \setminus A) = \emptyset$
+		\begin{proof}
+			 Let $A$ and $B$ be sets. Suppose, for the sake of contradiction, that  $(A \setminus B) \cap (B \setminus A) \neq \emptyset$.
+			 Since $(A \setminus B) \cap (B \setminus A) \neq \emptyset$, there must exists a integer $x$ such that $x \in (A \setminus B) \cap (B \setminus A)$. It implies that $x \in (A \setminus B) $ and $ x\in (B \setminus A)$.\\
+			 From $x \in (A \setminus B) $, we can conclude that $x \in A$, but $x \notin B$.\\
+		 	 From $x \in  (B \setminus A)$, we can conclude that $x \in B$, but $x \notin A$.\\
+		 	 We reached a conclusion that $ x\in A$ and $x \notin A$, which contradicts with each other.
+		 	 $\Rightarrow\Leftarrow $
+	 		\end{proof}
+		
+		\item Prove, by smallest counterexample, that for all $n \in \N$, $\displaystyle {2n \choose n} \leq 4^n$.
+		
+			\begin{proof}
+					Suppose, for the sake of contradiction, that the statement is false. Let $X$ be the set of counterexamples: 
+					
+					\[ X =  \Big\{  x \in \N  \Big|  {2x \choose x}  \nleq 4^x  \Big\} =  \Big\{  x \in \N  \Big|  {2x \choose x}  > 4^x  \Big\} \]
+					
+					As we have supposed that the statement is false, there must be a counterexample, so $X \ne \emptyset$. Since $X$ is a nonempty subset of $\N$, by Well-Ordering Principle, it contains a least element $x$. 
+					
+					Note that for $x=0$, $\displaystyle {2 \choose 1} = 2$ and $4^1=4$. Hence, $2<4$ and $ \displaystyle {2x \choose x}  < 4^x $.
+					
+					This means that $x=0$ is not a counterexample and hence $x >0$. Therefore, $x-1 \notin X$ because $x-1$ is smaller that the least element of $X$. 
+					
+					\[\displaystyle {2(x-1) \choose x-1} \leq 4^{(x-1)}  \]
+					\[ \frac{[2(x-1)]!}{(2(x-1)-(x-1))!(x-1)!} \leq 4^{(x-1)} \]
+					\[\frac{[2(x-1)]!}{(x-1)!(x-1)!} \leq 4^{(x-1)} \]
+					\[\frac{(2x-2)! (2x-1)2x}{(x-1)!(x-1)! (2x-1) 2x} \leq 4^{(x-1)} \]
+					\[\frac{(2x)!x}{2(x-1)! x (x-1)! x (2x-1) } \leq 4^{(x-1)} \]
+				 	\[\frac{(2x)!x}{x!x! 2(2x-1) } \leq 4^x \cdot \frac{1}{4} \]
+				 	\[ {2x\choose x} \cdot \frac{2x}{(2x-1) } \leq 4^x \]
+				 	Since $x>0$, we know that $\frac{2x}{(2x-1)}> 1$ since $2x < 2x-1$. Therefore,
+				 	\[ {2x\choose x} \leq 4^x\]
+				 	This shows that $x$ satisfies the proposition and is therefore not a counterexample, contradicting $x \in X$.
+				 	$\Rightarrow\Leftarrow $
+			\end{proof}
+		
+		\item The \textit{Tower of Hanoi} is a puzzle consisting of a board with three dowels and a collection of $n$ disks of $n$ different radii. The disks have holes drilled through their center o that they can fit on the dowels on the board. Initially, all the disks are are on the first dowel and are arranged in size order from the largest on the bottom to the smallest on the top. \\
+		The object of the puzzle is to move all of the disks to another dowel in as few moves as possible. Each move consists of taking the top disk off of one of the stacks and placing it on another stack, with the added condition that you may not place a larger disk atop a smaller one. The figure below shows how to solve the Tower of Hanoi in three moves when $n = 2$.\\
+		Prove that for $n \in \mathbb{N}$ the Tower of Hanoi puzzle with $n$ disks can be solved in $2^n-1$ moves.
+		\begin{proof}
+			We prove this result by induction on $n$. Let $A$ be the set of natural numbers for wihch the above statement is true.
+			Note that the statement is true when $n=0$ because when there is no disks on the tower, no moves needed, $2^0-1 =0$. 
+			
+			Suppose, the result is true when $n=k$; that is, we assume that Tower of Hanoi puzzle with $k$ disks can be solved in  $2^k -1$ moves.
+			
+			We must prove that the statement is true when $n=k+1$ ; that is, we assume that Tower of Hanoi puzzle with $k+1$ disks can be solved in  $2^{k+1} -1$ moves. Note that moving the largest disks to the destination dowel are always necessary. To achieve that, we must move $k$ disks to the intermediate dowel, which involves with $2^k-1$ steps. Then, we move the largest disks to the destination dowel, which takes one move. After that, we need to move the $k$ disks from the intermediate dowel to the destination dowel, which requires $2^k-1$ moves as well. In total, $2^k-1 + 1 + 2^k-1 = 2^{k+1} -1$ moves are requried.\\
+			We have shown $0 \in A$ and $k \in A \implies (k+1) \in A$. Therefore, by induction, we know that $A \in \N$ and the statement is true for all natural numbers.
+		\end{proof}
+		
+		\item A flagpole is $n$ feet tall. On this pole we display flags of the following types: red flags that are 1 foot tall, blue flags that are 2 feet tall, and green flags that are 2 feet tall. The sum of the heights of the flags is exactly $n$ feet.\\
+		Prove that there are $\displaystyle \frac{2}{3} 2^n + \frac{1}{3} (-1)^n$ ways to display the flags.
+		
+		\begin{proof}
+				We prove this result by strong induction on $n$. Let $A$ be the set of natural numbers for wihch the above statement is true. 
+				Note that the statement is true when $n=0$ because when there is no flags on the pole, there is only one way displaying it, $\displaystyle \frac{2}{3} 2^1 + \frac{1}{3} (-1)^1 = 1$.\\
+				Suppose, the result is true when $n=1,2,3...k$. Let $n=k+1$, we must prove that there are $\displaystyle \frac{2}{3} 2^{n+1} + \frac{1}{3} (-1)^{n+1}$ ways to display the flags. \\
+				There are three possible ways to add the last flag:
+				If the last flag is red, which is 1 foot tall, there are $n$ feet left on the pole and hence $\displaystyle \frac{2}{3} 2^n + \frac{1}{3} (-1)^n \cdot 1$ ways.\\
+				If the last flag is blue, which is 2 foot tall, there are $n-1$ feet left on the pole and hence $\displaystyle \frac{2}{3} 2^{n-1} + \frac{1}{3} (-1)^{n-1} \cdot 1$ ways.
+				If the last flag is green, similarly, there are $\displaystyle \frac{2}{3} 2^{n-1} + \frac{1}{3} (-1)^{n-1} \cdot 1$  ways.\\
+				In total, there are $\displaystyle \frac{2}{3} 2^n + \frac{1}{3} (-1)^n + 2 \cdot (\displaystyle \frac{2}{3} 2^{n-1} + \frac{1}{3} (-1)^{n-1} ) = \displaystyle \frac{2}{3} 2^{n+1} + \frac{1}{3} (-1)^{n+1} $ ways to display the flag.\\
+				We have shown $0 \in A$ and $0,1,2,...,k \in A \implies (k+1) \in A$. Therefore, by strong induction, we know that $A \in \N$ and the statement is true for all natural numbers.
+				
+		\end{proof}
+
+		\item Given a set of seven distinct positive integers, prove that there is a pair whose sum or whose difference is a multiple of 10. (You may use the fact that if the ones digit of an integer is 0, then that integer is a multiple of 10.)
+		\begin{proof}
+			As we are trying to prove for the multiple of 10, the only digit we care about is the ones digit. We have two cases depends on if repeating digit exists. \\
+			First, if there exists two or more integers with the same last digit, their differences will have ones digit of 0, which is a mutiple of 10.\\
+			Second, if there does not exist two or more integers with the same last digit; that is all the last digits are distinct. We have four possible combinations to make the sum of two integer a mutiple of 10, $(1,9),(2,8),(3,7),(4,6)$, and 0 and 5 are unable to pair with others. In the worst case scenario, we will have one number from each pair, 0 and 5. Since we have 7 integers and 6 options, the last one must come from the pairs and hence create the sum with mutiple of 10.
+			
+		\end{proof}
+		
+	\end{enumerate}
+\end{document}
