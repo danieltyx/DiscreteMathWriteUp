@@ -1,0 +1,167 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+\usepackage{listings}
+\usepackage{amsfonts} 
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+	{\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+	\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+	{\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	{\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+	\int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+
+%matrices
+\newenvironment{amatrix}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
+\lhead{2/15/22}
+\chead{\bf \large Write Up 7}
+\cfoot{Page \thepage}
+\begin{document}
+
+\textbf{For problems 1-3, let $H, K \leq G$.}
+ \begin{enumerate}
+    \item Prove that $H \subseteq K \implies H \leq K$.
+    
+	Suppose $H \subseteq K$. We want to show that $H$ is a subgroup of $K$, that is, we want to show that $H$ satisfies the three axioms of a group.
+
+First, since $H$ is a subset of $K$, any element of $H$ is also an element of $K$. So $H$ inherits the associative property of the binary operation from $K$.
+
+Second, since $H \subseteq K$, the identity element of $K$ must also be an element of $H$. Therefore, $H$ has an identity element.
+
+Third, for any element $h$ in $H$, its inverse in $K$ is also in $H$ because $H \subseteq K$. Therefore, $H$ has inverses for all its elements.
+
+Since $H$ satisfies the three axioms of a group, we can conclude that $H$ is a subgroup of $K$.
+
+    \item Show that $H \cap K \leq G$.
+ 
+    \item Let $G$ be an abelian group, and define $HK$ as follows:
+        \[HK = \{hk \mid h \subseteq H \text{  and  } k \in K\}\]
+        Prove that $HK \leq G$.
+ 
+    \item Suppose a group $G$ is generated by two elements $a$ and $b$.\\
+        Prove that $ab = ba \implies G$ is abelian.
+        \begin{proof}
+			Let us assume that $ab=ba$. We know that $G$ is a group and hence we only need to prove $G$ is communitive for the group to be abelian.
+        \end{proof}
+
+    \item Define the center of a group to be
+        \[C = \{g \in G \mid gx = xg, \forall x \in G\},\]
+        that is, the set of all elements of $G$ that commute with every element of $G$.\\
+        Prove $C \leq G$.
+
+	
+
+
+ \end{enumerate}
+\end{document}
