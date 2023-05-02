@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.9.13)  15 FEB 2023 14:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.9.13)  17 FEB 2023 13:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -617,6 +617,10 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <9> not available
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 132.
 
+Underfull \hbox (badness 10000) in paragraph at lines 180--182
+
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 28.64195pt, for example:
@@ -626,20 +630,49 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [1{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] (/Users/danieltian/Documents/GitHub/DiscreteMathWriteUp/WriteUps2023/writeup7/Tian_Daniel_wu7.aux) ) 
+]
+LaTeX Font Info:    Trying to load font information for U+fplmbb on input line 211.
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ufplmbb.fd
+File: ufplmbb.fd 2003/10/30 Fontinst v1.914 font definitions for U/fplmbb.
+)
+Overfull \hbox (29.16557pt too wide) in paragraph at lines 201--216
+\OML/zplm/m/it/12 a[]baa[] \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 a[]aba[] \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 ba[]$\OT1/ppl/m/n/12 ; $\OML/zplm/m/it/12 a[]$ \OT1/ppl/m/n/12 and $\OML/zplm/m/it/12 b[]$ \OT1/ppl/m/n/12 com-mute, $\OML/zplm/m/it/12 a[]b[] \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 a[]b[]aa[] \OT1/zplm/m/n/12 = \OML/zplm/m/it/12 a[]ab[]a[] \OT1/zplm/m/n/12 =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--216
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 28.64195pt, for example:
+(fancyhdr)                \setlength{\headheight}{28.64195pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-16.64195pt}.
+
+[2]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 28.64195pt, for example:
+(fancyhdr)                \setlength{\headheight}{28.64195pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-16.64195pt}.
+
+[3] (/Users/danieltian/Documents/GitHub/DiscreteMathWriteUp/WriteUps2023/writeup7/Tian_Daniel_wu7.aux) ) 
 Here is how much of TeX's memory you used:
- 28031 strings out of 478994
- 678226 string characters out of 5858184
- 1075712 words of memory out of 5000000
- 45030 multiletter control sequences out of 15000+600000
- 419363 words of font info for 73 fonts, out of 8000000 for 9000
+ 28063 strings out of 478994
+ 678665 string characters out of 5858184
+ 1084721 words of memory out of 5000000
+ 45050 multiletter control sequences out of 15000+600000
+ 426177 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,11n,103p,815b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /Users/danieltian/Documents/GitHub/DiscreteMathWriteUp/WriteUps2023/writeup7/Tian_Daniel_wu7.pdf (1 page, 66699 bytes).
+ 102i,13n,103p,815b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/mathpazo/fplmbb.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on /Users/danieltian/Documents/GitHub/DiscreteMathWriteUp/WriteUps2023/writeup7/Tian_Daniel_wu7.pdf (3 pages, 80119 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 46 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

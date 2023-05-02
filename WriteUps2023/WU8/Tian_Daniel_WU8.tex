@@ -1,0 +1,304 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,pgfplots,polynom,mathpazo,enumitem,textcase,bm,amsthm,fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=.9in, tmargin=1.5in, bmargin=1in]{geometry}
+\usepackage{physics}
+\usepackage{diffcoeff}
+
+\DeclareUnicodeCharacter{2212}{-}
+
+%pgfplots stuff
+\pgfplotsset{width=10cm,compat=1.9}
+\usepgfplotslibrary{external}
+%\tikzexternalize 
+
+
+%Theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}[section]
+
+%Sets and stuff
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\C}{\mathbb{C}}
+
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{solution}
+{\begin{proof}[Solution]\renewcommand\qedsymbol{$\square$}}
+ {\end{proof}}
+
+%Sequences and basic analysis
+\newcommand{\seq}[1]{\{{#1}_n\}_{n=1}^\infty}
+\newcommand{\seqk}[1]{\{{#1}_k\}_{k=1}^\infty}
+\newcommand{\sseq}[1]{\{{#1}_{n_k}\}_{k=1}^\infty}
+\newcommand{\script}[1]{\mathcal{#1}}
+\newcommand{\Lim}[1]{\lim\limits_{{#1}\rightarrow\infty}}
+\newcommand{\Limsup}[1]{\overline{\lim\limits_{{#1}\rightarrow\infty}}\textrm{ }}
+\newcommand{\Liminf}[1]{\underline{\lim\limits_{{#1}\rightarrow\infty}}}
+\newcommand{\re}{\textrm{Re}}
+\newcommand{\im}{\textrm{Im}}
+
+%making things bigger 
+\newcommand{\Frac}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\Int}[2]{\displaystyle\int_{#1}^{#2}}
+\newcommand{\Sum}[2]{\displaystyle\sum_{#1}^{#2}}
+\newcommand{\Heq}{\overset{\mathrm{H}}{=}}
+\newcommand{\dist}{\textrm{dist}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+ \raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+
+%formatting
+\newcommand\textlcsc[1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand{\tab}{\hspace{10mm}}
+
+%Vectors
+\newcommand{\X}{\textbf{X}}
+\newcommand{\Y}{\textbf{Y}}
+\newcommand{\U}{\textbf{U}}
+\newcommand{\vi}{\textbf{i}}
+\newcommand{\vj}{\textbf{j}}
+\newcommand{\vk}{\textbf{k}}
+\newcommand{\vr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\vcu}{\textbf{u}}
+\newcommand{\vca}{\textbf{a}}
+\newcommand{\vcb}{\textbf{b}}
+\newcommand{\vc}{\textbf{c}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\pfpu}{\dfrac{\partial f}{\partial  u}}
+\newcommand{\pfpv}{\dfrac{\partial f}{\partial  v}}
+\newcommand{\pfpw}{\dfrac{\partial f}{\partial  w}}
+\newcommand{\pfpx}{\dfrac{\partial f}{\partial  x}}
+\newcommand{\pfpy}{\dfrac{\partial f}{\partial  y}}
+\newcommand{\pupx}{\dfrac{\partial u}{\partial  x}}
+\newcommand{\pupy}{\dfrac{\partial u}{\partial  y}}
+\newcommand{\pupz}{\dfrac{\partial u}{\partial  z}}
+\newcommand{\pvpx}{\dfrac{\partial v}{\partial  x}}
+\newcommand{\pvpy}{\dfrac{\partial v}{\partial  y}}
+\newcommand{\pvpz}{\dfrac{\partial v}{\partial  z}}
+\newcommand{\pwpx}{\dfrac{\partial w}{\partial  x}}
+\newcommand{\pwpy}{\dfrac{\partial w}{\partial  y}}
+\newcommand{\pwpz}{\dfrac{\partial w}{\partial  z}}
+\renewcommand\arraystretch{1.2}
+%integrals
+\def\upint{\mathchoice%
+ {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+ {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+ {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+ {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+ \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+%partials
+\newcommand{\partd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\partdd}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2}}
+\newcommand{\Partdd}[3]{\frac{\partial^2 {#1}}{\partial {#2}\partial{#3}}}
+\newcommand{\Partddd}[4]{\frac{\partial^3 {#1}}{\partial {#2}\partial{#3}\partial{#4}}}
+\newcommand{\Partdddd}[5]{\frac{\partial^4 {#1}}{\partial {#2}\partial{#3}\partial{#4}\partial{#5}}}
+
+%words in math commands
+\newcommand{\mathand}{\quad\textrm{and}\quad }
+\newcommand{\st}{\textrm{ such that }}
+\newcommand{\as}{\textrm{ as }}
+\newcommand{\fs}{\textrm{ for some }}
+\newcommand{\fsoc}{\textrm{ for the sake of contradiction}}
+
+
+%matrices
+\newenvironment{amatrix}[1]{%
+ \left[\begin{array}{@{}*{#1}{c}|c@{}}
+ }{%
+ \end{array}\right]
+}
+
+%prove by contradiction
+\newcommand{\con}{\Rightarrow \Leftarrow}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Daniel transposition\\ Advanced Topics in Math, Foil}   
+\lhead{3/10/2023}
+\chead{\bf \large Write Up 8}
+\cfoot{Page \thepage}
+
+
+\begin{document}
+    \begin{enumerate}
+ \item Let $G$ be a group, $a\in G$ and $f: G\to G$ is defined by $x\mapsto ax$. Determine if $f$ is injective, and if it is surjective. Provide proof or counterexample of your claims.
+
+ \begin{proof}
+    Let $x,y \in G$. Hence $f(x) = ax$ and $f(y) = ay$. Then, Let $f(x) = f(y)$ and we need to proof it implies $x=y$ for it to be injective.
+    \begin{align*}
+        f(x) &= f(y) \\
+        ax &= ay \\
+        a^{-1}ax & = a^{-1}ay\\ 
+        x&= y\\
+    \end{align*}
+    Hence, $f$ is injective.\\
+    Let $y \in G$, such that for all element $y$, there exist $x\in G$ such that $f(x) = y$.
+    \begin{align*}
+        y&= ax\\
+        a^{-1}y &=  a^{-1}ax\\
+        x &= a^{-1}y \\
+    \end{align*}
+    Since both $a^{-1}$ and $y$ are in $G$, $x$ must also be in $G$. Therefore, for all $y \in G$, there exist $f(a^{-1}y) = aa^{-1}y = y$, which indicates that $f$ is also surjective.
+
+ \end{proof}
+        \item Let $f: A\to B$ and $g: B\to A$. Suppose that $f(x) = y \text{ iff } g(y) = x$. Prove that $f$ is bijective (and that $g = f^{−1}$).
+     \begin{proof}
+        We need to prove $f$ is bijective that is $f$ is both injective and surjective.\\
+        % Let $a,b \in A$ such that $f(a) = f(b)$ and let $f(a) = c$ and $f(b) = d$. Then, $g(f(a)) = g(c)$ and $g(f(b))= g(d)$. Having that $f(a) = f(b)$, we know that $c=d$ and $g(c) = g(d)$.
+        % Since $f(x) = y$ iff $g(y) = x$ and $f(a) = c$ and $f(b) = d$, we can conclude that $a= g(c) = g(d) =b$ and $f$ is injective.\\
+        % Let $y \in B$, and we need to prove that for all $y \in B$ there exists $x \in A$ such that $f(x) = y$ and hence $g(y) = x$s. 
+        % $y= f(x) = f(g(y))$. 
+        First, suppose that $f(x_1) = f(x_2)$ for some $x_1$, $x_2$ in $A$. We need to show that $x_1 = x_2$.
+        Since $f(x_1) = f(x_2)$, we have $g(f(x_1)) = g(f(x_2))$. By the statement, it implies that $x_1 = x_2$. Therefore, $f$ is injective.\\
+
+        Then, let $y \in B$, and we need to show that there exists an $x$ in $A$ such that $f(x) = y$.
+        Since, $g$ is from $B$ to $A$, there is $x$ such that $g(y) = x$. Then, by the condition, we will have $f(x) = y$. Therefore, $f$ is surjective and hence bijective.\\
+        
+        We know that $f(x) = f(g(y)) = y$ and $g(f(x)) = g(y) = x$. If $x=y$, then $ f(g(y))  = g(f(x)) = y = x$, which implies that $g = f^{-1}$.
+     \end{proof}
+      
+        
+        \item Let $A = \{x \in \R \mid x \neq 0, 1\}$ and $G = \{\epsilon, f , g, h, j, k\}$, where
+            \begin{align*}
+               \epsilon = x \qquad &f = 1 − x \qquad g = \frac{1}{x}\\
+               h = \frac{1}{1-x} \qquad &j = \frac{x-1}{x} \qquad d = \frac{x}{x-1}
+            \end{align*}
+        Show that $G \leq S_A$, and write the table out for $G$. ({\large H}INT: let the table do the heavy lifting for you.)
+        
+        \begin{proof}
+            To show that $G \leq S_A$, we need to show that $G$ is a subgroup of $S_A$. Since $x \in \R$ and $x \neq 0,1$, all element in $G$ is in real number, hence in $A$.
+            $S_A$ contains all permutations of $A$. Therefore, $G$ must be a nonempty subset of $S_A$.             
+
+Then, we need to show that $G$ is closed under function composition operation. We can prove it by building the table.
+
+
+$\epsilon \cdot \epsilon =\epsilon \cdot x = x = \epsilon$\\
+$\epsilon \cdot f = \epsilon \cdot (1-x) = 1-x = f$\\
+$\epsilon \cdot g =\epsilon \cdot \frac{1}{x} = \frac{1}{x} =g$\\
+$\epsilon \cdot h =\epsilon \cdot \frac{1}{1-x} = \frac{1}{1-x} = h$\\
+$\epsilon \cdot j =\epsilon \cdot \frac{x-1}{x} = \frac{x-1}{x} =j$\\
+$\epsilon \cdot d =\epsilon \cdot \frac{x}{x-1} = \frac{x}{x-1} = d$ \\
+
+$f \cdot \epsilon = f(x) = 1-x =f$ \\
+$f \cdot f = f(f(x)) = f(1-x) = x = \epsilon$\\
+$f \cdot g = f(g(x)) = f(\frac{1}{x}) = 1-\frac{1}{x} = \frac{x-1}{x} = j$\\
+$f \cdot h = f(h(x)) = f(\frac{1}{1-x}) = \frac{x}{1-x} = d$\\
+$f \cdot j = f(j(x)) = f(\frac{x-1}{x}) = \frac{1}{x} = g$\\
+$f \cdot d = f(d(x)) = f(\frac{x}{x-1}) = \frac{x-1-x}{x-1} = -\frac{1}{x-1} =\frac{1}{1-x}=h$\\
+
+$g \cdot \epsilon = g(x) = \frac{1}{x}$ = g\\
+$g \cdot f = g(f(x)) = g(1-x) = \frac{1}{1-x} = h$\\
+$g \cdot g = g(g(x)) = g(\frac{1}{x}) = x = \epsilon$\\
+$g \cdot h = g(h(x)) = g(\frac{1}{1-x}) = 1-x = f$ \\
+$g \cdot j = g(j(x)) = g(\frac{x-1}{x}) = \frac{x}{x-1}  =d$\\
+$g \cdot d = g(d(x)) = g(\frac{x}{x-1}) = \frac{1}{\frac{x}{x-1}} = \frac{x-1}{x} = j$\\
+
+$h \cdot \epsilon = h(x) = \frac{1}{1-x} = h$\\
+$h \cdot f = h(f(x)) = h(1-x) = \frac{1}{1-(1-x)} = \frac{1}{x} = g$\\
+$h \cdot g = h(g(x)) = h(\frac{1}{x}) = \frac{1}{1-\frac{1}{x}} = \frac{1}{\frac{x-1}{x}}=\frac{x}{x-1}=d$\\
+$h \cdot h = h(h(x)) = h(\frac{1}{1-x}) = \frac{1}{1-\frac{1}{1-x}}= \frac{1}{\frac{x}{x-1}}= \frac{x-1}{x}=j$\\
+$h \cdot j = h(j(x)) = h(\frac{x-1}{x}) = \frac{1}{1-\frac{x-1}{x}} = \frac{1}{\frac{1}{x}}=x=\epsilon$\\
+$h \cdot d = h(d(x)) = h(\frac{x}{x-1}) = \frac{1}{1-\frac{x}{x-1}} = \frac{1}{\frac{1}{1-x}}=f$\\
+
+$j \cdot \epsilon = j(x) = \frac{x-1}{x} = j$\\
+$j \cdot f = j(f(x)) = j(1-x) = \frac{1-x-1}{1-x}=  \frac{x}{x-1} = d$\\
+$j \cdot g = j(g(x)) = j(\frac{1}{x}) = \frac{\frac{1}{x}-1}{\frac{1}{x}} = 1-x = f$\\
+$j \cdot h = j(h(x)) = j(\frac{1}{1-x}) = \frac{\frac{1}{1-x}-1}{\frac{1}{1-x}} = \frac{\frac{x}{1-x}}{\frac{1}{1-x}}=x = \epsilon$\\
+$j \cdot j = j(j(x)) = j(\frac{x-1}{x}) = \frac{\frac{x-1}{x}-1}{\frac{x-1}{x}} = \frac{1}{1-x} =h$\\
+$j \cdot d = j(d(x)) = j(\frac{x}{x-1}) = \frac{\frac{1}{x-1}}{\frac{x}{x-1}} = \frac{1}{x} =g$\\
+
+
+$d \cdot \epsilon = d(x) = \frac{x}{x-1} = d$\\
+$d \cdot f = d(f(x)) = d(1-x) = \frac{1-x}{1-x-1} = \frac{1-x}{-x} = \frac{x-1}{x} =j$\\
+$d \cdot g = d(g(x)) = d(\frac{1}{x}) = \frac{\frac{1}{x}}{\frac{1}{x}-1} = \frac{1}{1-x} =h$\\
+$d \cdot h = d(h(x)) = d(\frac{1}{1-x}) = \frac{\frac{1}{1-x}}{\frac{1}{1-x}-1} = \frac{1}{x} =g$\\
+$d \cdot j = d(j(x)) = d(\frac{x-1}{x}) = \frac{\frac{x-1}{x}}{\frac{x-1}{x}-1} = \frac{x-1}{-1} = 1-x = f$\\
+$d \cdot d = d(d(x))= d(\frac{x}{x-1}) = \frac{\frac{x}{x-1}}{\frac{x}{x-1}-1} = \frac{x}{1} = x =\epsilon$\\
+
+
+
+$\epsilon \cdot \epsilon = \epsilon$ \\
+$\epsilon \cdot f = f(\epsilon) = 1-\epsilon = 1-x = f$\\
+$\epsilon \cdot g = g(\epsilon) = \frac{1}{\epsilon} = \frac{1}{x} = g$\\
+$\epsilon \cdot h = h(\epsilon) = \frac{1}{1-\epsilon} = \frac{1}{1-x} = h$\\
+$\epsilon \cdot j = j(\epsilon) = \frac{\epsilon - 1}{\epsilon} = \frac{x-1}{x} =j$\\
+$\epsilon \cdot d = d(\epsilon) = \frac{\epsilon}{\epsilon-1} = \frac{x}{x-1} = d$\\ 
+
+
+\begin{center}
+    \begin{tabular}{c|cccccc}
+    $\circ$ & $\epsilon$ & $f$ & $g$ & $h$ & $j$ & $d$ \\
+    \hline
+    $\epsilon$ & $\epsilon$  & $f$ & $g$ & $h$ & $j$ & $d$ \\
+    $f$ & $f$ & $\epsilon$ & $j$ & $d$ & $g$ & $h$ \\
+    $g$ & $g$ & $h$ & $\epsilon$ & $f$ & $d$ & $j$ \\
+    $h$ & $h$ & $g$ & $d$ & $j$ & $\epsilon$ & $f$ \\
+    $j$ & $j$ & $d$ & $f$ & $\epsilon$ & $h$  & $g$ \\
+    $d$ & $d$ & $j$ & $h$ & $g$ & $f$ & $\epsilon$\\
+    \end{tabular}
+    \end{center}
+
+    By exhaustion, we proved that the group is closed under the composite function(for all operations the result is unique and within the group). 
+    Also, noticing that the inverse is all defined because all elements can composite with one other element such that their product is the identity.
+    Therefore, $G$ is a subgroup of $S_A$.
+\end{proof}
+        \item Let $\alpha$ and $\beta$ be disjoint cycles:
+        \[\alpha = (a_1\ a_2...a_s)\qquad \beta = (b_1\ b_2...b_r)\]
+            \begin{enumerate}[label=(\alph*)]
+                \item Prove that for $n \in \Z^+$, $(\alpha\beta)^n = \alpha^n\beta^n$.
+                
+                \begin{proof}
+                    Since $\alpha$ and $\beta$ are disjoint hence commute. That is $\alpha\beta = \beta\alpha$.
+                    \begin{align*}
+                        \alpha^n\beta^n &= \alpha... \alpha\alpha\alpha\beta\beta\beta...\beta \\
+                        &= \alpha... \alpha\alpha\beta\alpha\beta\beta...\beta \\
+                        &= \alpha... \alpha\beta\alpha\beta\alpha\beta...\beta \\
+                    \end{align*}
+                    keep substituting $\alpha\beta$ with $\beta\alpha$ until the first two cycles are $\alpha \beta$ we will have:\\
+                    \begin{align*}
+                        &= \alpha\beta...\alpha\beta \\
+                    \end{align*}
+                    Noticing that the total number of cycle $\alpha$ and $\beta$ is fixed, $\alpha\beta$ will repeat $n$ times, hence $\alpha^n\beta^n =  (\alpha\beta)^n$ .
+                   
+                \end{proof}
+                \item Find a transposition $\gamma$ such that $\alpha \beta \gamma$ is a cycle. Then show that $\alpha \gamma \beta$ and $\gamma \alpha \beta$ are cycles.
+                \begin{solution}
+                    Since $\alpha$ and $\beta$ are disjoint, $\gamma$ must carry some $b$ to some $a$. We can make it to carry the last element of $b$ 
+                    to the first element of $a$. That is $\gamma = (a_1,b_r)$. We will have $(a_1\ a_2...a_s)(b_1\ b_2...b_r)(a_1,b_r)$
+                    
+                    
+                    
+                    
+                    We will have $(a_1\ a_2...a_s)(a_1,b_r)(b_1\ b_2...b_r)$. 
+                    Starting with $b_1$, it will be carried to $b_2$,
+                    $b_2$ to $b_3$ ... until $b_{r-2}$ is carried to $b_{r-1}$. Then, $b_{r-1}$ will be carried to $b_r$ in the third cycle, to $a_1$ in the second cycle and to $a_2$ in the first cycle. 
+                    Continuing with $a_2$, it will be carried to $a_3$,
+                    $a_3$ to $a_4$ ... until $a_{s-1}$ is carried to $a_s$. Then, $a_s$ will be carried to $a_1$. Lastly, $a_1$ will be carried to $b_r$. The cycle will then be $(b_1b_2...b_{r-1}a_2a_3...a_sa_1b_r)$\\
+               
+               For $\alpha \gamma \beta$, we have $(a_1\ a_2...a_s)(a_1,b_r) $
+               
+               
+                \end{solution}
+            \end{enumerate}
+
+        
+
+        \item If $\pi$ is a permutation in $S_n$, and $\alpha$ is a cycle, we call $\pi \alpha \pi^{-1}$ a \textbf{conjugate} of $\alpha$. Let $\alpha = (a_1\ a_2...a_s)$ show that its conjugate $\pi \alpha \pi^{-1}$ is the cycle
+        \[(\pi(a_1)\ \pi(a_2)...\pi(a_s)).\]
+
+ \end{enumerate}
+\end{document}

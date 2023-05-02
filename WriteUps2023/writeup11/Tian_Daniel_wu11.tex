@@ -124,59 +124,14 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
-\lhead{1/19/22}
-\chead{\bf \large Write Up 6}
+\lhead{4/6/23}
+\chead{\bf \large Write Up 9}
 \cfoot{Page \thepage}
 
 \begin{document}
-	If $G$ is a group, an \textbf{automorphism} of $G$ is an isomorphism from $G$ to $G$.
+
 	\begin{enumerate}
-		\item If $G$ is any group, and $a$ is any element of $G$, prove that $f(x) = axa^{-1}$ is an automorphism of $G$. We call this $conjugation$ by $b$.
-		
-	\begin{proof}
-		We need to show that $f$ is a bijecton function and satisfy that $f(xy) = f(x)f(y)$ such that $x,y$ are both in $G$.
-		Let $x,y \in G$ and $f(x) = f(y)$.
-		\begin{align*}
-			axa^{-1} &= aya^{-1} \\
-			a^{-1}	axa^{-1} &= 	a^{-1}aya^{-1} \\
-			xa^{-1} &= ya^{-1} \\
-				xa^{-1}a &= ya^{-1}a \\
-				x&=y
-		\end{align*}
-	Hence, $f$ is injective.
-	Then, let us prove that for every $y \in G$ there exists $ x$ in G such that $f(x) = y$.
-	 We have $x = a^{-1}ya$ satisfy the statement. $y = a( a^{-1}ya)a^{-1}= f(x)$ Hence, $f$ is surjective and hence bijective.
-	 
-	 Lastly, we need to show that $f(xy) = f(x)f(y)$ for all $x,y \in G$.
-	 \begin{align*}
-	 	f(xy) &= a(xy)a^{-1} \\
-	 &= axya^{-1}\\
-	 f(x)f(y) &= axa^{-1}  aya^{-1}\\
-	  &= axeya^{-1}\\
-	  	  &= axya^{-1}
-	 \end{align*}
-	 Hence, $f$ is isomorphsm for all $x,y \in G$. Therefore, $f$ is an automorphism of $G$.
-	 	\end{proof}
-		\item Since each automorphism of $G$ is a bijective function from $G$ to $G$, it is a $permutation$ of $G$. Define Aut($G$) as the set of all automorphisms of $G$. Prove Aut($G$)$\leq S_G$.
-		
-		\begin{proof}
-			First, we need to show that $Aut(G)$ is a nonempty subset of $S_G$. We can say that $\epsilon \in Aut(G)$ if $G$ is a isomorphism of $G$. Consider the identity function for $G$: $\epsilon(x) = x$. It is injective as 
-			
-			
-			\end{proof}
-		
-		\item We'll prove some basic properties of order. Let $a, b, c\in G$. Show that
-			\begin{enumerate}[label=(\alph*)]
-			\item ord$(a) = $ ord$(bab^{-1})$
-			\item ord$(a^{-1}) = $ ord$(a)$
-		\end{enumerate}
-		\item Now show
-		\begin{enumerate}[label=(\alph*)]
-			\item ord$(ab) = $ ord$(ba)$
-			\item ord$(abc) = $ ord$(cab) = $ ord$(bca)$
-		\end{enumerate}
-		
-		\item Let $a\in G$, and of finite order. Prove that if $a$ is the $only$ element of order $k$ in $G$, then $a$ is in the center of $G$.
+		\item a
 		
 	\end{enumerate}
 \end{document}
