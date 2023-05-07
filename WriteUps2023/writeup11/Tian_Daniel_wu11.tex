@@ -124,14 +124,73 @@
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Daniel Tian\\ Advanced Topics in Math, Foil}   
-\lhead{4/6/23}
-\chead{\bf \large Write Up 9}
+\lhead{5/5/23}
+\chead{\bf \large Write Up 11}
 \cfoot{Page \thepage}
-
 \begin{document}
 
 	\begin{enumerate}
-		\item a
+		
+		\item If $\phi$ $:$ $G\rightarrow H$ is a homomorphism with kernel $ker(\phi)$, then $\phi$ is injective iff $ker(\phi)=\{e\}$
+		
+		\begin{proof}
+			$(=>)$  Given that $\phi$ is injective, let $g \in G$ such that $\phi(g) = e$. From the homomorphism, we know that $\phi(e) = e$. Hence, $\phi(g) = \phi(e)$. By the injectivity, $g=e$. Therefore, $ker(\phi) = \{e\}$.
+			
+			$(<=)$  Given that $ker(\phi) = \{e\}$, let $g_1, g_2 \in G$ such that $\phi(g1) = \phi(g2)$.			
+			\begin{align*}
+				\phi (g_1) &= \phi (g_2) \\
+				\phi (g_1) \phi (g_2)^{-1} &= e\\
+				\phi (g_1) \phi (g_2^{-1}) &= e\\
+					\phi (g_1 g_2^{-1}) &= e\\
+			\end{align*}			
+			Since $e$ is the only element in $K$, $g_1 g_2^{-1} = e$. It implies that $g_1 = ((g_2)^{-1})^{-1} = g_2$. Therefore, $\phi$ is injective.
+			
+		\end{proof}
+		
+		
+		
+		\item Let $C$ be the center of $G$. Prove $C\unlhd G$.
+		\begin{proof} 
+		We have proved that the center of $G$ is a subgroup of $G$ in write up 7. Now we need to show it is a normal subgroup. Let $c \in C$, $g \in G$. $gcg^{-1} = cgg^{-1} = c$. Therefore, $C\unlhd G$.
+			
+		\end{proof}
+		
+		
+		
+		
+		\item Prove that any intersection of normal subgroups of $G$ is itself a normal subgroup of $G$.
+		
+		\begin{proof}
+			Let $H$ and $K$ be two arbitrary normal subgroups of $G$. We need to first prove that $H \cap K$ is a subgroup of $G$. 
+			
+			First $H \cap K$ must contains the identity because both $H$ and $K$ contain it. Second, let $a, b \in H \cap K$. It implies that $a,b \in H $ and $a,b \in K$. That is $ab \in H$ and $ab \in G$, and hence $ab \in H \cap K$. Third, let $a^{-1} \in H \cap K$. It implies that $ a^{-1} \in H$ and $a^{-1} in K$. Hence, $a^{-1} \in H \cap K$. 
+		
+			Then, let $g \in G$ and $a \in H \cap K$. We know that $gag^{-1} \in H$ because $H$ is a normal subgroup. Similarly, $gag^{-1} \in K$. Hence, 	$gag^{-1} \in H \cap K$.
+		
+			Therefore, we can conclude that any intersection of normal subgroups of $G$ is itself a normal subgroup of $G$.
+		
+	\end{proof}
+		
+		
+		
+		
+		
+		\item Let $\phi$ $:$ $G\rightarrow H$, where $\phi$ is surjective. Prove that if $G$ is cyclic, then $H$ is cyclic. (assumed homomorphism)
+		
+		
+		\begin{proof}
+			Since G is cylic, we have an element $x$ such that $G= \langle x \rangle$. Let $g \in G$ and we can repreesnt $g$ and $x^m$ where m is an integer. Hence, $\phi(g) =  \phi (x^m) = (\phi(x))^m = h \in H$ by homomorphism. Then we know that $H \in  \langle  \phi(x)\rangle$. We also know from the surjectivity that $ \langle\phi(x)\rangle \in H$. Therefore, $H =   \langle \phi(x)\rangle$, which proves that $H$ is cyclic.
+			
+			\end{proof}
+		
+		
+		
+		\item Let $\phi$ $:$ $G\rightarrow H$, where $\phi$ is surjective. Prove that if every element of $G$ has finite order, then every element of $H$ also has finite order.(assumed homomorphism)
+		\begin{proof}
+			
+				Since every element of $G$ has a finite order, let $ord(g) = m$ and $g^m = e, g \in G, m \in \Z$. Let $h = \phi (g)$. We have $\phi(g^m) = \phi(e) = e$ and $\phi(g^m) =(\phi(g))^m$ from homomorphism. Hence, $\phi(g^m) = e = (\phi(g))^m = h^m$. Therefore, $h \in H$ has finite order(any factor of $m$). Since the choice of $g$ is arbitrary, every other element of $H$ also has finite order.
+			
+		\end{proof}
 		
 	\end{enumerate}
 \end{document}
